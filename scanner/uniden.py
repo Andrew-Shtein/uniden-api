@@ -208,7 +208,7 @@ class UnidenScanner:
 			return 0
 
 		(cmd,frq_tgid,mod,att,ctcss_dcs,name1,name2,name3,
-	 	sql,mut,sys_tag,chan_tag,p25nac)=res.split(",")
+		sql,mut,sys_tag,chan_tag,p25nac)=res.split(",")
 
 		dict={'frq_tgid':frq_tgid, 'mod':mod, 'att':att,
 			'ctcss_dcs':ctcss_dcs, 'name1':name1, 'name2':name2, 
@@ -327,13 +327,13 @@ class UnidenScanner:
 		(each # is 0 or 1)                         ||||||||・・+- Band10
 		0 means OFF				   ||||||||       :
 		1 means ON 				   |||||||+---- Band 2
-		                                           ||||||+----- Band 1
-		                                           |||||+------ Reserve
-		                                           ||||+------- NOAA WX
-		                                           |||+-------- VHF TV
-		                                           ||+--------- UHF TV
-		                                           |+---------- FM
-		                                           +----------- Pager
+												   ||||||+----- Band 1
+												   |||||+------ Reserve
+												   ||||+------- NOAA WX
+												   |||+-------- VHF TV
+												   ||+--------- UHF TV
+												   |+---------- FM
+												   +----------- Pager
 		REP		Repeater Find (0:OFF / 1:ON)
 		AGC_ANALOG	AGC Setting for Analog Audio (0:OFF / 1:ON)
 		AGC_DIGITAL	AGC Setting for Digital Audio (0:OFF / 1:ON)
@@ -632,10 +632,10 @@ class UnidenScanner:
 
 		"""BNAD_NO		Band No (1-31) Band number of band coverage
 		STP			Search Step
-		                        500: 5k 625: 6.25k 750: 7.5 k
-		                        833: 8.33k 1000 : 10k 1250 : 12.5k
-		                        1500 : 15k 2000 : 20k 2500 : 25k
-		                        5000 : 50k 10000 : 100k
+								500: 5k 625: 6.25k 750: 7.5 k
+								833: 8.33k 1000 : 10k 1250 : 12.5k
+								1500 : 15k 2000 : 20k 2500 : 25k
+								5000 : 50k 10000 : 100k
 		MOD			Modulation (AM / NFM / FM / WFM / FMB)"""
 
 		dfb = [0]
@@ -779,7 +779,7 @@ class UnidenScanner:
 		for sys in systems:
 
 			try:
-                		sys_type = scanner_sys_type[sys['type']]
+						sys_type = scanner_sys_type[sys['type']]
 				protected = scanner_onoff[sys['protected']]
 
 			except KeyError:
@@ -853,21 +853,21 @@ class UnidenScanner:
 
 	def dump_search_settings(self):
 
-                """Returns YAML formatted text of scanner settings."""
+				"""Returns YAML formatted text of scanner settings."""
 
-                return yaml.dump(self.searches.dump())
+				return yaml.dump(self.searches.dump())
 
 	def load_search_settings(self, fname):
 
-                """Load YAML formatted text to memory.
-                It is up to user to set data into scanner.
-                See sample YAML file in examples."""
+				"""Load YAML formatted text to memory.
+				It is up to user to set data into scanner.
+				See sample YAML file in examples."""
 
-                searches=yaml.load(file(fname, 'r'))
+				searches=yaml.load(file(fname, 'r'))
 
-                self.searches.load(**searches)
+				self.searches.load(**searches)
 
-                return 1
+				return 1
 
 	#TODO 2nd queue
 	def get_localtion_settings(self):pass
@@ -907,32 +907,32 @@ class Settings:
 		"""Get following scanner settings:
 
 		Backlight		EVENT IF=INFINITE,10=10sec,30=30sec,KY=KEYPRESS,SQ=SQUELCH
-		                        COLOR BLUE,RED,MAGENTA,GREEN,CYAN,YELLOW,WHITE
-		                        DIMMER Backlight Dimmer (1:Low / 2:Middle / 3:High)
+								COLOR BLUE,RED,MAGENTA,GREEN,CYAN,YELLOW,WHITE
+								DIMMER Backlight Dimmer (1:Low / 2:Middle / 3:High)
 		Battery Info		BAT_SAVE Battery Save (0:OFF / 1:ON)
-		           		CHARGE_TIME Battery Charge Time (1-16)
+						CHARGE_TIME Battery Charge Time (1-16)
 		COM port		BAUDRATE OFF,4800,9600,19200,38400,57600,115200
-		                        When receive “COM,OK”, next command should not be send in 2 second.
-		                        Only PC Control (Baud Rate) does not become an initial-setting value.
+								When receive “COM,OK”, next command should not be send in 2 second.
+								Only PC Control (Baud Rate) does not become an initial-setting value.
 		Key Beep		LEVEL Beep Level (0:Auto / 1-15 / 99:OFF)
 					LOCK Key Lock status (0:OFF / 1:ON)
-		                        SAFE Key Safe status (0:OFF / 1:ON)
+								SAFE Key Safe status (0:OFF / 1:ON)
 		Opening Message		Lx_CHAR LineX Characters (max.16char), X=1..4
 		Priority Mode		PRI_MODE Priority Setting (0:OFF / 1:ON / 2:PLUS ON)
-		                        MAX_CHAN Priority Scan max channels at once (1-100)
-		                        INTERVAL Priority Scan Interval time (1-10)
+								MAX_CHAN Priority Scan max channels at once (1-100)
+								INTERVAL Priority Scan Interval time (1-10)
 		Auto Gain Control	A_RES Analog Response Time (-4 - +6)
-		                        A_REF Analog Reference Gain (-5 - +5)
-		                        A_GAIN Analog Gain Range ( 0 - 15)
-		                        D_RES Digital Response Time (-8 - +8)
-		                        D_GAIN Digital Reference Gain (-5 - +5)
+								A_REF Analog Reference Gain (-5 - +5)
+								A_GAIN Analog Gain Range ( 0 - 15)
+								D_RES Digital Response Time (-8 - +8)
+								D_GAIN Digital Reference Gain (-5 - +5)
 		System Count		### (0 - 500)
 		LCD Contrast		CONTRAST LCD Contrast (1 - 15)
 		Scanner Option		DISP_MODE DISPPALY MODE ( 1:MODE1 / 2:MODE2 / 3:MODE3 )
-		                        CH_LOG Control Channel Logging ( 0:OFF / 1:ON / 2:Extend )
-		                        G_ATT Global attenuator ( 0: OFF / 1: ON )
-		                        P25_LPF P25 Low Pass Filter ( 0: OFF / 1: ON )
-		                        DISP_UID Display Unit ID ( 0: OFF / 1: ON )"""
+								CH_LOG Control Channel Logging ( 0:OFF / 1:ON / 2:Extend )
+								G_ATT Global attenuator ( 0: OFF / 1: ON )
+								P25_LPF P25 Low Pass Filter ( 0: OFF / 1: ON )
+								DISP_UID Display Unit ID ( 0: OFF / 1: ON )"""
 
 		try:
 			blt = self.scanner.raw('BLT')
@@ -1100,23 +1100,23 @@ class System:
 
 		self.scanner = scanner
 		self.sys_index = sys_index
-                self.sys_type = 'CNV'
-                self.name = 'NONAME'
-                self.quick_key = '.'
-                self.hld = '0'
-                self.lout = '0'
-                self.dly = '0'
-                self.rev_index = None
-                self.fwd_index = None
-                self.chn_grp_head = None
-                self.chn_grp_tail = None
-                self.seq_no = None
-                self.start_key = '.'
-                self.number_tag = 'NONE'
-                self.agc_analog = '0'
-                self.agc_digital = '0'
-                self.p25waiting = '200'
-                self.protect = '0'
+				self.sys_type = 'CNV'
+				self.name = 'NONAME'
+				self.quick_key = '.'
+				self.hld = '0'
+				self.lout = '0'
+				self.dly = '0'
+				self.rev_index = None
+				self.fwd_index = None
+				self.chn_grp_head = None
+				self.chn_grp_tail = None
+				self.seq_no = None
+				self.start_key = '.'
+				self.number_tag = 'NONE'
+				self.agc_analog = '0'
+				self.agc_digital = '0'
+				self.p25waiting = '200'
+				self.protect = '0'
 
 		self.id_search='0'
 		self.s_bit='0'
@@ -1216,7 +1216,7 @@ class System:
 
 		cmd = ','.join(['SIN',self.sys_index])
 
-                try:
+				try:
 			res = self.scanner.raw(cmd)
 
 		except CommandError:
@@ -1248,7 +1248,7 @@ class System:
 
 			cmd = ','.join(['TRN',self.sys_index])
 
-        	        try:
+					try:
 				res = self.scanner.raw(cmd)
 
 			except CommandError:
@@ -1273,7 +1273,7 @@ class System:
 
 		cmd = ','.join(['QGL',self.sys_index])
 
-                try:
+				try:
 			res = self.scanner.raw(cmd)
 
 		except CommandError:
@@ -1289,7 +1289,7 @@ class System:
 
 	def set_data(self):
 
-                """Set scanner system data to device."""
+				"""Set scanner system data to device."""
 
 		rsv = ''
 		res = ''
@@ -1299,7 +1299,7 @@ class System:
 				rsv,str(self.number_tag),str(self.agc_analog),
 				str(self.agc_digital),str(self.p25waiting)])
 
-                try:
+				try:
 			res = self.scanner.raw(cmd)
 
 		except CommandError:
@@ -1318,7 +1318,7 @@ class System:
 					str(self.mot_id),self.emg_color,str(self.emg_pattern),
 					self.p25nac,str(self.pri_id_scan)])
 
-        	        try:
+					try:
 				res = self.scanner.raw(cmd)
 
 			except CommandError:
@@ -1331,7 +1331,7 @@ class System:
 		s=''.join(t)
 		cmd = ','.join(['QGL',self.sys_index,s])
 
-                try:
+				try:
 			res = self.scanner.raw(cmd)
 
 		except CommandError:
@@ -1406,18 +1406,18 @@ class System:
 		mi='decimal'
 		ep='on'
 		pis='off'
-                stype=human_sys_type[self.sys_type]
-                qk=self.quick_key
-                if self.lout: lout=human_lout[self.lout]
+				stype=human_sys_type[self.sys_type]
+				qk=self.quick_key
+				if self.lout: lout=human_lout[self.lout]
 		if self.emgl: level=human_alert_tlevels[self.emgl]
-                sk=self.start_key
-                tag=self.number_tag
-                if self.agc_analog!='': agca=human_onoff[self.agc_analog]
+				sk=self.start_key
+				tag=self.number_tag
+				if self.agc_analog!='': agca=human_onoff[self.agc_analog]
 		else: agca=''
-                if self.agc_digital!='': agcd=human_onoff[self.agc_digital]
+				if self.agc_digital!='': agcd=human_onoff[self.agc_digital]
 		else: agcd=''
-                pw=self.p25waiting
-                pr=human_onoff[self.protect]
+				pw=self.p25waiting
+				pr=human_onoff[self.protect]
 
 		ids=human_id_search[self.id_search]
 		if self.s_bit: sb=human_sbit[self.s_bit]
@@ -1460,13 +1460,13 @@ class System:
 
 		"""Loads dictionary to system class."""
 
-                self.name = name
-                self.quick_key = str(quick_key)
-                self.hld = str(hold)
+				self.name = name
+				self.quick_key = str(quick_key)
+				self.hld = str(hold)
 		self.dly = str(delay)
-                self.start_key = str(start_key)
-                self.number_tag = str(tag)
-                self.p25waiting = str(p25_waiting)
+				self.start_key = str(start_key)
+				self.number_tag = str(tag)
+				self.p25waiting = str(p25_waiting)
 		self.quick_lockout = tuple(grp_lockout)
 
 		self.emg=str(alert)
@@ -1476,10 +1476,10 @@ class System:
 		self.p25nac=str(nac)
 			
 		try:
-                	self.sys_type = scanner_sys_type[type]
-                	self.lout = scanner_lout[lockout]
-                	self.agc_analog = scanner_onoff[agc_analog]
-	                self.agc_digital = scanner_onoff[agc_digital]
+					self.sys_type = scanner_sys_type[type]
+					self.lout = scanner_lout[lockout]
+					self.agc_analog = scanner_onoff[agc_analog]
+					self.agc_digital = scanner_onoff[agc_digital]
 			self.protected = scanner_onoff[protected]
 			self.id_search=scanner_id_search[id_mode]
 			self.s_bit=scanner_sbit[status]
@@ -1598,7 +1598,7 @@ class System:
 		tgid=0
 		l=[]		
 
-                try:
+				try:
 			while int(tgid) <> -1:
 				res = self.scanner.raw(cmd)
 				(gli,tgid) = res.split(',')
@@ -1615,7 +1615,7 @@ class System:
 		tgid=0
 		l=[]		
 
-                try:
+				try:
 			while int(tgid) <> -1:
 				res = self.scanner.raw(cmd)
 				(sli,tgid) = res.split(',')
@@ -1667,7 +1667,7 @@ class System:
 
 class Group:
 
-        """Scanner Group class."""
+		"""Scanner Group class."""
 
 	def __init__(self, scanner, grp_index, sys_type):
 
@@ -1720,7 +1720,7 @@ class Group:
 
 		cmd = ','.join(['GIN',self.grp_index])
 
-                try:
+				try:
 			res = self.scanner.raw(cmd)
 
 		except CommandError:
@@ -1751,14 +1751,14 @@ class Group:
 
 	def set_data(self):
 
-                """Set scanner group data to device."""
+				"""Set scanner group data to device."""
 
 		rsv = ''
 		cmd = ','.join(['GIN',str(self.grp_index),self.name,str(self.quick_key),
 				str(self.lout),str(self.latitude),str(self.longitude),
 				str(self.grp_range),str(self.gps_enable)])
 
-                try:
+				try:
 			res = self.scanner.raw(cmd)
 
 		except CommandError:
@@ -1773,7 +1773,7 @@ class Group:
 
 	def show(self):
 
-                """Shows group data. Not descending to channels and tgids."""
+				"""Shows group data. Not descending to channels and tgids."""
 
 		print ('--------GROUP-------')
 		print ('Group Index:\t\t\t%s') % self.grp_index
@@ -1793,7 +1793,7 @@ class Group:
 
 	def show_brief(self):
 
-                """Shows brief group data: index, name, channels or tgids."""
+				"""Shows brief group data: index, name, channels or tgids."""
 
 		print ('\tIndex: %s\tName: %s\tLockout: %s') % (self.grp_index,self.name,human_lout[self.lout])
 		for i in sorted(self.channels): self.channels[i].show_brief()
@@ -1801,7 +1801,7 @@ class Group:
 
 	def dump(self):
 
-                """Dumps group data to dictionary."""
+				"""Dumps group data to dictionary."""
 
 		gt=self.grp_type
 		qk=self.quick_key
@@ -1828,7 +1828,7 @@ class Group:
 	def load(self, name='NONAME', quick_key='.', lockout='unlock', latitude='00000000N', type='C',
 			longitude='000000000W', range='0', gps='off', tgids=[], channels=[]):
 
-                """Loads dictionary to group class."""
+				"""Loads dictionary to group class."""
 
 		self.name=name
 		self.latitude=latitude
@@ -1937,7 +1937,7 @@ class Group:
 
 class Site:
 
-        """Scanner Site class."""
+		"""Scanner Site class."""
 
 	def __init__(self, scanner, sit_index):
 
@@ -1976,11 +1976,11 @@ class Site:
 	def get_data(self):
 
 		"""Get Site Information.
-                In set command, only "," parameters are not changed.
-                The set command is aborted if any format error is detected.
-                When the system protect bit is ON, except [NAME], [REV_INDEX], [FWD_INDEX],
-                [SYS_INDEX], [CHN_HEAD], [CHN_TAIL], other parameters will be send as a reserve
-                parameter in the Radio -> Controller command.
+				In set command, only "," parameters are not changed.
+				The set command is aborted if any format error is detected.
+				When the system protect bit is ON, except [NAME], [REV_INDEX], [FWD_INDEX],
+				[SYS_INDEX], [CHN_HEAD], [CHN_TAIL], other parameters will be send as a reserve
+				parameter in the Radio -> Controller command.
 
 		INDEX			Site Index
 		NAME			Name (max.16char)
@@ -2007,11 +2007,11 @@ class Site:
 
 		cmd = ','.join(['SIF',self.sit_index])
 
-                try:
+				try:
 			res = self.scanner.raw(cmd)
 
 		except CommandError:
-                        self.logger.error('get_data(): %s' % cmd)
+						self.logger.error('get_data(): %s' % cmd)
 			return 0
 
 		(sif,rsv1,self.name,self.quick_key,self.hld,self.lout,
@@ -2031,11 +2031,11 @@ class Site:
 
 		cmd = ','.join(['MCP',self.sit_index])
 
-                try:
+				try:
 			res = self.scanner.raw(cmd)
 
 		except CommandError:
-                        self.logger.error('get_data(): %s' % cmd)
+						self.logger.error('get_data(): %s' % cmd)
 			return 0
 
 		(mcp,lower1,upper1,step1,offset1,lower2,upper2,step2,offset2,
@@ -2049,11 +2049,11 @@ class Site:
 
 		cmd = ','.join(['ABP',self.sit_index])
 
-                try:
+				try:
 			res = self.scanner.raw(cmd)
 
 		except CommandError:
-                        self.logger.error('get_data(): %s' % cmd)
+						self.logger.error('get_data(): %s' % cmd)
 			return 0
 
 		(abp,bf_0,sf_0,bf_1,sf_1,bf_2,sf_2,bf_3,sf_3,bf_4,sf_4,bf_5,sf_5,
@@ -2069,7 +2069,7 @@ class Site:
 
 	def set_data(self):
 
-                """Set scanner site data to device."""
+				"""Set scanner site data to device."""
 
 		rsv = ''
 		cmd = ','.join(['SIF',str(self.sit_index),self.name,str(self.quick_key),
@@ -2078,11 +2078,11 @@ class Site:
 				str(self.sit_range),str(self.gps_enable),rsv,self.mot_type,
 				self.edacs_type,str(self.p25waiting),rsv])
 
-                try:
+				try:
 			res = self.scanner.raw(cmd)
 
 		except CommandError:
-                        self.logger.error('set_data(): %s' % cmd)
+						self.logger.error('set_data(): %s' % cmd)
 			return 0
 
 		for t in self.trunk_frqs.values(): t.set_data()
@@ -2270,10 +2270,10 @@ class Channel:
 
 		"""Get Channel Information.
 		In set command, only "," parameters are not changed.
-                The set command is aborted if any format error is detected.
-                When the system protect bit is ON, except [NAME], [REV_INDEX], [FWD_INDEX],
-                [SYS_INDEX], [CHN_HEAD], [CHN_TAIL], other parameters will be send as a reserve
-                parameter in the Radio -> Controller command.
+				The set command is aborted if any format error is detected.
+				When the system protect bit is ON, except [NAME], [REV_INDEX], [FWD_INDEX],
+				[SYS_INDEX], [CHN_HEAD], [CHN_TAIL], other parameters will be send as a reserve
+				parameter in the Radio -> Controller command.
 
 		INDEX			Channel Index
 		NAME			Name (max.16char)
@@ -2299,7 +2299,7 @@ class Channel:
 
 		cmd = ','.join(['CIN',self.chn_index])
 
-                try:
+				try:
 			res = self.scanner.raw(cmd)
 
 		except CommandError:
@@ -2326,7 +2326,7 @@ class Channel:
 				self.p25nac,str(self.number_tag),self.alt_color,str(self.alt_pattern),
 				str(self.vol_offset)])
 
-                try:
+				try:
 			res = self.scanner.raw(cmd)
 
 		except CommandError:
@@ -2448,11 +2448,11 @@ class TrunkFrequency():
 
 		"""Get Trunk Frequency Info
 		In set command, only "," parameters are not changed.
-                The set command is aborted if any format error is detected.
+				The set command is aborted if any format error is detected.
 		For Motorola or EDACS SCAT System, [LCN] is ignored.
 		When the system protect bit is ON, except [NAME], [REV_INDEX], [FWD_INDEX],
-                [SYS_INDEX], [CHN_HEAD], [CHN_TAIL], other parameters will be send as a reserve
-                parameter in the Radio -> Controller command.
+				[SYS_INDEX], [CHN_HEAD], [CHN_TAIL], other parameters will be send as a reserve
+				parameter in the Radio -> Controller command.
 
 		CHN_INDEX		Trunk Frequency Index
 		FRQ			Trunk Frequency
@@ -2467,7 +2467,7 @@ class TrunkFrequency():
 
 		cmd = ','.join(['TFQ',self.chn_index])
 
-                try:
+				try:
 			res = self.scanner.raw(cmd)
 
 		except CommandError:
@@ -2488,7 +2488,7 @@ class TrunkFrequency():
 		cmd = ','.join(['TFQ',self.chn_index,self.frq,str(self.lcn),
 				str(self.lout),rsv,str(self.number_tag),
 				str(self.vol_offset),rsv])
-                try:
+				try:
 			res = self.scanner.raw(cmd)
 
 		except CommandError:
@@ -2578,10 +2578,10 @@ class TalkGroupID():
 
 		"""Get TGID Information
 		In set command, only "," parameters are not changed.
-                The set command is aborted if any format error is detected.
-                When the system protect bit is ON, except [NAME], [REV_INDEX], [FWD_INDEX],
-                [SYS_INDEX], [CHN_HEAD], [CHN_TAIL], other parameters will be send as a reserve
-                parameter in the Radio -> Controller command.
+				The set command is aborted if any format error is detected.
+				When the system protect bit is ON, except [NAME], [REV_INDEX], [FWD_INDEX],
+				[SYS_INDEX], [CHN_HEAD], [CHN_TAIL], other parameters will be send as a reserve
+				parameter in the Radio -> Controller command.
 
 		INDEX		TGID Index
 		NAME		Name (max.16char)
@@ -2602,7 +2602,7 @@ class TalkGroupID():
 
 		cmd = ','.join(['TIN',self.chn_index])
 
-                try:
+				try:
 			res = self.scanner.raw(cmd)
 
 		except CommandError:
@@ -2626,7 +2626,7 @@ class TalkGroupID():
 				str(self.number_tag),self.alt_color,str(self.alt_pattern),
 				str(self.vol_offset)])
 
-                try:
+				try:
 			res = self.scanner.raw(cmd)
 
 		except CommandError:
@@ -2730,26 +2730,26 @@ class Search:
 
 		"""Get Search/Close Call Settings.
 	
-                MOD             Modulation (AUTO/AM/FM/NFM/WFM/FMB)
-                ATT             Attenuation (0:OFF / 1:ON)
-                DLY             Delay Time (-10,-5,-2,0,1,2,5,10,30)
-                CODE_SRCH       CTCSS/DCS/P25 NAC Search (0:OFF / 1: CTCSS/DCS / 2: P25 NAC Search)
-                BSC             Broadcast Screen (16digit: ########・・#)
-                (each # is 0 or 1)                         ||||||||・・+- Band10
-                0 means OFF                                ||||||||       :
-                1 means ON                                 |||||||+---- Band 2
-                                                           ||||||+----- Band 1
-                                                           |||||+------ Reserve
-                                                           ||||+------- NOAA WX
-                                                           |||+-------- VHF TV
-                                                           ||+--------- UHF TV
-                                                           |+---------- FM
-                                                           +----------- Pager
-                REP             Repeater Find (0:OFF / 1:ON)
+				MOD             Modulation (AUTO/AM/FM/NFM/WFM/FMB)
+				ATT             Attenuation (0:OFF / 1:ON)
+				DLY             Delay Time (-10,-5,-2,0,1,2,5,10,30)
+				CODE_SRCH       CTCSS/DCS/P25 NAC Search (0:OFF / 1: CTCSS/DCS / 2: P25 NAC Search)
+				BSC             Broadcast Screen (16digit: ########・・#)
+				(each # is 0 or 1)                         ||||||||・・+- Band10
+				0 means OFF                                ||||||||       :
+				1 means ON                                 |||||||+---- Band 2
+														   ||||||+----- Band 1
+														   |||||+------ Reserve
+														   ||||+------- NOAA WX
+														   |||+-------- VHF TV
+														   ||+--------- UHF TV
+														   |+---------- FM
+														   +----------- Pager
+				REP             Repeater Find (0:OFF / 1:ON)
 		MAX_STORE	Max Auto Store (1-256)
-                AGC_ANALOG      AGC Setting for Analog Audio (0:OFF / 1:ON)
-                AGC_DIGITAL     AGC Setting for Digital Audio (0:OFF / 1:ON)
-                P25WAITING      P25 Waiting time (0,100,200,300, .... , 900,1000) ms
+				AGC_ANALOG      AGC Setting for Analog Audio (0:OFF / 1:ON)
+				AGC_DIGITAL     AGC Setting for Digital Audio (0:OFF / 1:ON)
+				P25WAITING      P25 Waiting time (0,100,200,300, .... , 900,1000) ms
 
 		Get Search Key Settings
 
@@ -3343,23 +3343,23 @@ class Search:
 					if 'agc_analog' not in service_search[i]: self.service_search[i].update({'agc_analog':''})
 					else: self.service_search[i].update({'agc_analog':scanner_onoff[service_search[i]['agc_analog']]})
 					if 'agc_digital' not in service_search[i]: self.service_search[i].update({'agc_digital':''})
-                                        else: self.service_search[i].update({'agc_digital':scanner_onoff[service_search[i]['agc_digital']]})
-                                        if 'attenuation' not in service_search[i]: self.service_search[i].update({'attenuation':''})
-                                        else: self.service_search[i].update({'attenuation':scanner_onoff[service_search[i]['attenuation']]})
-                                        if 'delay' not in service_search[i]: self.service_search[i].update({'delay':''})
-                                        else: self.service_search[i].update({'delay':service_search[i]['delay']})
-                                        if 'hold' not in service_search[i]: self.service_search[i].update({'hold':''})
-                                        else: self.service_search[i].update({'hold':service_search[i]['hold']})
-                                        if 'lockout' not in service_search[i]: self.service_search[i].update({'lockout':''})
-                                        else: self.service_search[i].update({'lockout':scanner_lout[service_search[i]['lockout']]})
-                                        if 'number_tag' not in service_search[i]: self.service_search[i].update({'number_tag':''})
-                                        else: self.service_search[i].update({'number_tag':service_search[i]['number_tag']})
-                                        if 'p25waiting' not in service_search[i]: self.service_search[i].update({'p25waiting':''})
-                                        else: self.service_search[i].update({'p25waiting':service_search[i]['p25waiting']})
-                                        if 'quick_key' not in service_search[i]: self.service_search[i].update({'quick_key':''})
-                                        else: self.service_search[i].update({'quick_key':service_search[i]['quick_key']})
-                                        if 'start_key' not in service_search[i]: self.service_search[i].update({'start_key':''})
-                                        else: self.service_search[i].update({'start_key':service_search[i]['start_key']})
+										else: self.service_search[i].update({'agc_digital':scanner_onoff[service_search[i]['agc_digital']]})
+										if 'attenuation' not in service_search[i]: self.service_search[i].update({'attenuation':''})
+										else: self.service_search[i].update({'attenuation':scanner_onoff[service_search[i]['attenuation']]})
+										if 'delay' not in service_search[i]: self.service_search[i].update({'delay':''})
+										else: self.service_search[i].update({'delay':service_search[i]['delay']})
+										if 'hold' not in service_search[i]: self.service_search[i].update({'hold':''})
+										else: self.service_search[i].update({'hold':service_search[i]['hold']})
+										if 'lockout' not in service_search[i]: self.service_search[i].update({'lockout':''})
+										else: self.service_search[i].update({'lockout':scanner_lout[service_search[i]['lockout']]})
+										if 'number_tag' not in service_search[i]: self.service_search[i].update({'number_tag':''})
+										else: self.service_search[i].update({'number_tag':service_search[i]['number_tag']})
+										if 'p25waiting' not in service_search[i]: self.service_search[i].update({'p25waiting':''})
+										else: self.service_search[i].update({'p25waiting':service_search[i]['p25waiting']})
+										if 'quick_key' not in service_search[i]: self.service_search[i].update({'quick_key':''})
+										else: self.service_search[i].update({'quick_key':service_search[i]['quick_key']})
+										if 'start_key' not in service_search[i]: self.service_search[i].update({'start_key':''})
+										else: self.service_search[i].update({'start_key':service_search[i]['start_key']})
 
 			except Exception, e:
 				self.logger.error('load(), service search %s' % str(e))
